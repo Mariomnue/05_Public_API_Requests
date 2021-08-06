@@ -1,7 +1,7 @@
 /* Treehouse FSJS Techdegree
  * Project 5 - Public API Requests
  * scripts.js */
-
+//preventDefault();
 
 
 
@@ -9,8 +9,38 @@
 *   Fetch functions
 *#############*/
 fetch('https://randomuser.me/api/?results=12&exc=login,registered,id')
-     .then(response => response.json())
+     .then(response => response.json())//parse the data to json
      .then(data => console.log(data))
+     //.then(data => generateCard())
+     //.then(data)
+
+
+
+
+/*############
+*   Array functions
+*#############*/
+
+
+
+let text = '{ "employees" : ['+
+     '{"name.first":name.first,'+
+     '"name.last":name.last,'+
+     '"picture":picture.thumbnail,'+
+     '"email":email,'+
+     '"location.country":location.country,'+
+     '"location.city":location.city,'+
+     '"location.state":location.state,'+
+     '"postcode":location.postcode,'+
+     '"street.number":street.number,'+
+     '"street.name":street.name,'+
+     '"dob":dob.date,'+
+     '"age":dob.age,}'+
+     ']};'
+
+const obj = JSON.parse(text);
+
+
 
 
 
@@ -18,18 +48,24 @@ fetch('https://randomuser.me/api/?results=12&exc=login,registered,id')
    build Card
 #############*/
 
-/*
-const card = `
+const card = document.getElementById('gallery')
+//const employees = data
+function generateCard(){
+     //console.log(data);
+
+//     const card = document.getElementById('gallery')
+     const cardhtml = `
           <div class="card">
-               <div class="card-img-container">
-               <img class="card-img" src=" ${profileImage} " alt="profile picture">
-          </div>
           <div class="card-info-container">
-               <h3 id="name" class="card-name cap"> ${name}</h3>
-               <p class="card-text"> ${email}</p>
-               <p class="card-text cap"> ${city} ", " ${state}</p>
+               <h3 id="name" class="card-name cap">${obj.employees[0].name.first}</h3>
+               <p class="card-text">email</p>
+               <p class="card-text cap">city, state</p>
+          </div>
+
+
           </div>`
-*/
+}
+
 
 
 
@@ -41,6 +77,10 @@ const card = `
 #############*/
 
 /*
+
+<div class="card-img-container">
+     <img class="card-img" src="${data[0].picture}"  alt="profile picture">
+</div>
 const modalText = `
      <div class="modal-container">
           <div class="modal">
