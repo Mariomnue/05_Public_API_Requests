@@ -3,44 +3,20 @@
  * scripts.js */
 //preventDefault();
 
+let gallery = document.querySelector('#gallery');
+//use querySelector, getElementbyID is bad
+let employees = []
 
 
 /*############
 *   Fetch functions
 *#############*/
+//simple fetch method
 fetch('https://randomuser.me/api/?results=12&exc=login,registered,id')
-     .then(response => response.json())//parse the data to json
-     .then(data => console.log(data))
-     //.then(data => generateCard())
-     //.then(data)
-
-
-
-
-/*############
-*   Array functions
-*#############*/
-
-
-
-let text = '{ "employees" : ['+
-     '{"name.first":name.first,'+
-     '"name.last":name.last,'+
-     '"picture":picture.thumbnail,'+
-     '"email":email,'+
-     '"location.country":location.country,'+
-     '"location.city":location.city,'+
-     '"location.state":location.state,'+
-     '"postcode":location.postcode,'+
-     '"street.number":street.number,'+
-     '"street.name":street.name,'+
-     '"dob":dob.date,'+
-     '"age":dob.age,}'+
-     ']};'
-
-const obj = JSON.parse(text);
-
-
+     .then(res => res.json())//parse the data to json
+     .then(res => res.results)
+     .then(generateGallery)
+     .catch(err => console.log(err))
 
 
 
@@ -48,27 +24,34 @@ const obj = JSON.parse(text);
    build Card
 #############*/
 
-const card = document.getElementById('gallery')
-//const employees = data
-function generateCard(){
-     //console.log(data);
 
-//     const card = document.getElementById('gallery')
-     const cardhtml = `
-          <div class="card">
-          <div class="card-info-container">
-               <h3 id="name" class="card-name cap">${obj.employees[0].name.first}</h3>
-               <p class="card-text">email</p>
-               <p class="card-text cap">city, state</p>
-          </div>
+//json returned us a nice little array of objects. now we need to turn it into something we can use.
+function generateGallery(employeeData){
+console.log(employeeData);//I got data.
+     let employees = employeeData;
+     let cardHTML = '';
+     employees.forEach((employee, index) => {
+          let name = employee.name;
+          let email = employee.email;
+          let picture = employee.picture;
+          let location = employee.location;
+          let dob = employee.dob;
 
-
+          cardHTML += `
+          <div class="card" data-index="1">
+               <div class="card" data-index="${index}">
+                    <img class="card-img" src="${picture.thumbnail}"  alt="profile picture">
+               </div>
+               <div class="card-info-container">
+                    <h3 id="name" class="card-name cap">${name.first} ${name.last}</h3>
+                    <p class="card-text">${email}</p>
+                    <p class="card-text cap">${location.city}, ${location.state}</p>
+               </div>
           </div>`
+     });
+     //console.log(${employee.name});
+     gallery.innerHTML = cardHTML;
 }
-
-
-
-
 
 
 
@@ -79,7 +62,7 @@ function generateCard(){
 /*
 
 <div class="card-img-container">
-     <img class="card-img" src="${data[0].picture}"  alt="profile picture">
+     <img class="card-img" src="${picture}"  alt="profile picture">
 </div>
 const modalText = `
      <div class="modal-container">
