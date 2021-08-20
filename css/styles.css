@@ -128,6 +128,20 @@ header h1 {
     right: 0;
     bottom: 0;
     left: 0;
+		margin: 10px auto auto;
+		padding-bottom: 15px;
+    background: rgba(2, 0, 36, 0.8);
+		visibility: hidden;
+}
+
+.modal-container-hiddens {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+		margin: 10px auto auto;
+		padding-bottom: 15px;
     background: rgba(2, 0, 36, 0.8);
 		visibility: hidden;
 }
@@ -144,6 +158,10 @@ header h1 {
     border: 1px solid rgba(100, 100, 100, 0.3);
     transition: .4s ease-out;
 
+}
+
+.modal-info-person {
+	display: none;
 }
 
 .show-modal {
