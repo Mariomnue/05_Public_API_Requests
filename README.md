@@ -10,4 +10,13 @@
 
     This webpage is built with css, html, and javascript. 
 
+
+
+08/20/21
+Works. Cards and modals populate.
+ Card clicked idendified.
+  Found modal window that matches clicked card.
+   Modal window made visible with click.
+Need close, next, and prev buttons to work
+Need search feature implemented.
  
