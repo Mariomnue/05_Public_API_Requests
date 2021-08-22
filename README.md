@@ -11,6 +11,14 @@
     This webpage is built with css, html, and javascript. 
 
 
+8/22/21
+some CSS tweeking
+Needs code snippets: dob.date formated. non-state information used
+exit button
+next and back buttons
+Search implemented
+
+
 
 08/20/21
 Works. Cards and modals populate.

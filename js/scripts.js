@@ -7,8 +7,8 @@ let gallery = document.querySelector('#gallery');
 let employees = [];
 let index = 0;
 containerObjModal = [];
-//  Beforebegin
 
+//  afterbegin insert after opening body tag.
 document.body.insertAdjacentHTML('afterbegin',`
      <div class="modal-container">
           <div class="modal">
@@ -51,15 +51,17 @@ console.log(employeeData);//I got data.
      let modalText = '';
      employees.forEach((employee, index) => {
 
-//const {0: name, 1: price, 2: prgrm} = data;
           let cardIndex = index;
           let modalIndex = cardIndex + 100;
           let name = employee.name;
           let email = employee.email;
           let picture = employee.picture;
           let location = employee.location;
-          let dob = employee.dob;//Must format it please
+          let dob = employee.dob;//Must format it please. Function needed
           let phone = employee.phone;
+//location state not everyone lives in a state! need a function or an if (true) {
+//} else {
+//}Function needed
           let address = location.street.number + " " +
                location.street.name + ", " +
                location.city + ", " + location.state + ", " + location.postcode
@@ -87,9 +89,7 @@ console.log(employeeData);//I got data.
                          <p class="modal-text">${phone}</p>
                          <p class="modal-text">${location.street.number} ${location.street.name}</p>
                          <p class="modal-text">${location.city}, ${location.state}, ${location.postcode}</p>
-                         <p class="modal-text">Birthday: ${dob.date}  ${dob.age}</p>
-                         <hr>
-
+                         <p class="modal-text">Birthday: ${dob.date}   Age: ${dob.age}</p>
                     </div>
                </div>
                <div class="modal-btn-container">
@@ -98,7 +98,8 @@ console.log(employeeData);//I got data.
                </div>
           </div>
                `
-          //console.log(document.getElementsByClassName("modal-info-container"));
+
+
 
      })
 
