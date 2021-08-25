@@ -36,11 +36,11 @@ fetch('https://randomuser.me/api/?results=12&exc=login,registered,id')
      .then(res => res.results)
      .then(generateGallery)
      .catch(err => console.log(err))
-
+//net::ERR_CONNECTION_RESET
 
 
 /*############
-   build Card Gallery
+   build Card and Modal Galleries
 #############*/
 
 
@@ -57,14 +57,15 @@ console.log(employeeData);//I got data.
           let email = employee.email;
           let picture = employee.picture;
           let location = employee.location;
-          let dob = employee.dob;//Must format it please. Function needed
+          let dob = employee.dob;
+          let birthday = formatInput(dob.date.substring(0,10));
+console.log(birthday + " happy birthday");
           let phone = employee.phone;
-//location state not everyone lives in a state! need a function or an if (true) {
-//} else {
-//}Function needed
           let address = location.street.number + " " +
                location.street.name + ", " +
-               location.city + ", " + location.state + ", " + location.postcode
+               location.city + ", " + location.state + ", " + location.postcode;
+          let nat = employee.nat;
+
           cardHTML += `
 
           <div class="card" data-index="${cardIndex}">
@@ -89,7 +90,7 @@ console.log(employeeData);//I got data.
                          <p class="modal-text">${phone}</p>
                          <p class="modal-text">${location.street.number} ${location.street.name}</p>
                          <p class="modal-text">${location.city}, ${location.state}, ${location.postcode}</p>
-                         <p class="modal-text">Birthday: ${dob.date}   Age: ${dob.age}</p>
+                         <p class="modal-text">Birthday: ${birthday}</p>
                     </div>
                </div>
                <div class="modal-btn-container">
@@ -117,6 +118,64 @@ function displayModal(index){
      console.log(index + "is it still here");//itis
 }
 
+
+
+/*############
+   Helper functions
+#############*/
+
+
+
+function formatInput(dob){
+     let bday = dob;
+     let month = parseMonth(bday.substring(5,7));
+     let day = bday.substring(8,10);
+     let year = bday.substring(0,4);
+     let birthday = month + "-" + day + "-" + year;
+     return birthday;
+}
+
+function parseMonth(month){
+     switch (month) {
+          case "01":
+               month = "January"
+               break;
+          case "02":
+               month = "February"
+               break;
+          case "03":
+               month = "March"
+               break;
+          case "04":
+               month = "April"
+               break;
+          case "05":
+               month = "May"
+               break;
+          case "06":
+               month = "June"
+               break;
+          case "07":
+               month = "July"
+               break;
+          case "08":
+               month = "August"
+               break;
+          case "09":
+               month = "September"
+               break;
+          case "10":
+               month = "October"
+               break;
+          case "11":
+               month = "November"
+               break;
+          case "12":
+               month = "December"
+               break;
+     }
+     return month;
+};//Switch the month names
 
 
 

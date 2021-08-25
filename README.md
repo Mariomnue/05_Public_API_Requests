@@ -11,7 +11,14 @@
     This webpage is built with css, html, and javascript. 
 
 
+8/25/21
+Settled on a simple css style, not much different from the original. I may change it.
+Dob.date birthday has been formatted.
+non-state information is an incorrect statement. It should be ingnored.
+
+
 8/22/21
+Happy with the simple style.
 some CSS tweeking
 Needs code snippets: dob.date formated. non-state information used
 exit button
