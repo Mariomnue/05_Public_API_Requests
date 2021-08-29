@@ -5,10 +5,11 @@
 
 let gallery = document.querySelector('#gallery');
 let employees = [];
-let index = 0;
-containerObjModal = [];
+let index = 1;
+let modalIndex = index;
 
-//  afterbegin insert after opening body tag.
+//  afterbegin insert the Modal Container, and modal
+//close button, next, prev
 document.body.insertAdjacentHTML('afterbegin',`
      <div class="modal-container">
           <div class="modal">
@@ -20,11 +21,14 @@ document.body.insertAdjacentHTML('afterbegin',`
           </div>
      </div>
 `)
-console.log(employees);//empty good
-const container = document.querySelector('.modal-container');
-let containerObj
+
+const container = document.querySelector('.modal-container');//background modal
+let containerObj//each person will make their own modal text window;
 const modal = document.querySelector(".modal");
-const closeButton = document.querySelector(".modal-close-btn");//Search Feature
+const closeButton = document.querySelector(".modal-close-btn");//close the modal
+const prevButton = document.getElementById('modal-prev');//prev modal
+const nextButton = document.getElementById('modal-next');//next modal
+
 
 
 /*############
@@ -39,11 +43,16 @@ fetch('https://randomuser.me/api/?results=12&exc=login,registered,id')
 //net::ERR_CONNECTION_RESET
 
 
+
+
 /*############
-   build Card and Modal Galleries
+   build Cards gallery and Modal window div objects
+//this is where:
+/* all the data gets stored,
+/* the gallery cards get built,
+/* each person modal containerObj is built
+/* then it is rewritten to the DOM using innerHTML
 #############*/
-
-
 function generateGallery(employeeData){
 console.log(employeeData);//I got data.
      let employees = employeeData;
@@ -52,14 +61,13 @@ console.log(employeeData);//I got data.
      employees.forEach((employee, index) => {
 
           let cardIndex = index;
-          let modalIndex = cardIndex + 100;
+          let modalIndex = cardIndex;
           let name = employee.name;
           let email = employee.email;
           let picture = employee.picture;
           let location = employee.location;
           let dob = employee.dob;
           let birthday = formatInput(dob.date.substring(0,10));
-console.log(birthday + " happy birthday");
           let phone = employee.phone;
           let address = location.street.number + " " +
                location.street.name + ", " +
@@ -80,9 +88,7 @@ console.log(birthday + " happy birthday");
           </div>
 
           <div data-index="${modalIndex}" class="modal-container">
-
                <div class="modal">
-                    <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
                     <div id=${index} class="modal-info-container">
                          <img class="modal-img" src="${picture.large}"  alt="larger profile picture">
                          <h3 id="name" class="modal-name">${name.first} ${name.last}</h3>
@@ -93,30 +99,16 @@ console.log(birthday + " happy birthday");
                          <p class="modal-text">Birthday: ${birthday}</p>
                     </div>
                </div>
-               <div class="modal-btn-container">
-                    <button type="button" id="modal-prev" class="modal-prev btn">Prev</button>
-                    <button type="button" id="modal-next" class="modal-next btn">Next</button>
-               </div>
           </div>
                `
-
-
-
      })
 
      gallery.innerHTML = cardHTML;
 
      containerObj = document.getElementsByClassName("modal-info-container");
 
-     console.log(containerObj[0]);//YEAH
 }
 
-
-function displayModal(index){
-//let modalIndex = index;
-
-     console.log(index + "is it still here");//itis
-}
 
 
 
@@ -124,8 +116,7 @@ function displayModal(index){
    Helper functions
 #############*/
 
-
-
+//turn the date of birth into nicely formatted birthday.
 function formatInput(dob){
      let bday = dob;
      let month = parseMonth(bday.substring(5,7));
@@ -135,6 +126,7 @@ function formatInput(dob){
      return birthday;
 }
 
+//Switch the month names
 function parseMonth(month){
      switch (month) {
           case "01":
@@ -175,7 +167,7 @@ function parseMonth(month){
                break;
      }
      return month;
-};//Switch the month names
+};
 
 
 
@@ -183,64 +175,116 @@ function parseMonth(month){
    Event Listeners
 #############*/
 
-
-//a card has been clicked, show the matching modal
+/*Each card can be clicked on,
+/* modal appears to pop on,
+/*  it is being made visible.
+*/
+//Don't touch me
 gallery.addEventListener('click', e => {
-console.log("give me "  +e);
-
      if(e.target !== gallery){
           const card = e.target.closest('.card');
           index = card.getAttribute('data-index');
           modalIndex = index;
           const modalContainer = card.closest('modal-info-container');
 
-console.log('card # ' + index  + " was clicked");
-
-console.log(containerObj[index]);//the correct mogal containerObjModal[index]
-
-console.log(containerObj[index].id);
-
-     if(index == containerObj[index].id){
-          console.log('make it visible');
-          if(index === "1"){
-               console.log("index is equal to 1");
+          if(index == containerObj[index].id){
                container.classList.toggle("show-modal");
-               containerObj[1].classList.toggle("show-modal")
-
+               makeSwitch();
           }
      }
+})//Don't touch me
 
-     }})
-
-
+/*This uses index to compare the case
+/*toggle the containerObj turning both on an off,
+//switching it to visible or invisible
+*/
+function makeSwitch(){
+console.log(index +" Make Switch " + modalIndex);
+     switch (index) {
+          case "0":
+          containerObj[0].classList.toggle("show-modal")
+               break;
+          case "1":
+          containerObj[1].classList.toggle("show-modal")
+               break;
+          case "2":
+          containerObj[2].classList.toggle("show-modal")
+               break;
+          case "3":
+          containerObj[3].classList.toggle("show-modal")
+               break;
+          case "4":
+          containerObj[4].classList.toggle("show-modal")
+               break;
+          case "5":
+          containerObj[5].classList.toggle("show-modal")
+               break;
+          case "6":
+          containerObj[6].classList.toggle("show-modal")
+               break;
+          case "7":
+          containerObj[7].classList.toggle("show-modal")
+               break;
+          case "8":
+          containerObj[8].classList.toggle("show-modal")
+               break;
+          case "9":
+          containerObj[9].classList.toggle("show-modal")
+               break;
+          case "19":
+          containerObj[10].classList.toggle("show-modal")
+               break;
+          case "11":
+          containerObj[11].classList.toggle("show-modal")
+               break;
+     }
+}
+/*
 function windowOnClick(event){
      if(event.target === modal){
           toggleModal();
-     }
+      }
+}*/
+
+//Used by the close button
+function toggleModal() {
+   container.classList.toggle("show-modal");//toggle the blue/white background.
+   makeSwitch();//toggle the containerObj[]'s (modal-info-container objects)
+   containerObj[index].style.visibility = 'hidden';
+   containerObj[parseInt(index) + 1].style.visibility = 'hidden';
+   containerObj[parseInt(index) - 1].style.visibility = 'hidden';
+   //index = 0;
 }
 
+//move next in the gallery of modals
+function nextOnClick(event){
+containerObj[index].style.visibility = 'hidden';
+     if(index === "12"){
+          index = "1";
+     }
+     else{
+          index = parseInt(index) + 1;//advance the index #
+          containerObj[index].style.visibility = 'visible';//turn new one on
+          index = index.toString();//return # to string;
+     }
+     modalIndex = index;
+}
 
-//closeButton.addEventListener("click", toggleModal);
-window.addEventListener("click", windowOnClick);
+//move back in the gallery of modals
+function prevOnClick(event){
+containerObj[index].style.visibility = 'hidden';
+     if(index === "1"){
+          index = "12";
+     }
+     else{
+          index = parseInt(index) - 1;//advance the index #
+          containerObj[index].style.visibility = 'visible';//turn new one on
+          index = index.toString();//return # to string;
+     }
+     modalIndex = index;
+}
 
-
-//const modal = document.querySelector(".modal");
-    //const trigger = document.querySelector(".trigger");
-//    const closeButton = document.querySelector(".close-button");
-
-    function toggleModal() {
-        container.classList.toggle("show-modal");//close the modal
-        containerObj.classList.toggle("show-modal")
-        console.log('close the window');//this works
-    }
-
-/*
-    function windowOnClick(event) {//close the background click
-        if (event.target === container) {
-            toggleModal();
-        }
-    }
-*/
-    //trigger.addEventListener("click", toggleModal);
-    closeButton.addEventListener("click", toggleModal);
-    window.addEventListener("click", windowOnClick);
+closeButton.addEventListener("click", toggleModal);
+//container.addEventListener("click", windowOnClick);
+nextButton.addEventListener("click", nextOnClick);
+prevButton.addEventListener("click", prevOnClick);

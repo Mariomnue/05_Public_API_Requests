@@ -134,11 +134,11 @@ header h1 {
 		visibility: hidden;
 }
 
-
+/*    width: 95%;*/
 
 .modal {
     position: relative;
-    width: 95%;
+    width: 98%;
     max-width: 420px;
     min-height: 415px;
     margin: 10px auto auto;
@@ -150,8 +150,15 @@ header h1 {
 
 }
 
-.modal-info-person {
-	display: none;
+.modal-info-container {
+	position: relative;
+	z-index: -1;
+	width: 95%;
+	max-width: 400px;
+	min-height: 205px;
+	margin: 25px auto auto;
+	padding-bottom: 15px;
+	transition: .4s ease-out;
 }
 
 .show-modal {
@@ -161,10 +168,11 @@ header h1 {
 			transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
 }
 
+
 .modal-close-btn {
     position: absolute;
-    top: 15px;
-    right: 15px;
+    top: 2px;
+    right: 2px;
     cursor: pointer;
     color: rgba(255, 255, 255, 0.9);
     background: rgba(0, 0, 0, 0.8);
@@ -174,7 +182,7 @@ header h1 {
 
 .modal-img {
     width: 150px;
-    margin-top: 35px;
+    margin-top: 15px;
     border-radius: 50%;
 }
 

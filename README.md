@@ -10,6 +10,14 @@
 
     This webpage is built with css, html, and javascript. 
 
+8/29/2021
+Exit button works
+Next button works
+Back button works
+There is a gap in the display of modals which is causing an error to occur moving back and forth and opening and closing.
+Special attention to the last and first position gaps
+   prevent 0 needs to be implemented.
+
 
 8/25/21
 Settled on a simple css style, not much different from the original. I may change it.
