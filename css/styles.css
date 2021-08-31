@@ -56,7 +56,7 @@ header h1 {
 }
 
 .search-submit:active, .search-submit:hover, .search-submit:focus {
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 25, 255, 0.9);
     border: 1px solid rgba(50, 50, 50, 0.9);
 }
 
@@ -269,7 +269,7 @@ header h1 {
 @media (min-width: 1024px) {
 
     .card:hover {
-        background: rgba(255, 255, 255, 1);
+        background: rgba(255, 25, 255, 1);
         border: 1px solid rgba(50, 50, 50, 0.9);
     }
 
