@@ -10,6 +10,11 @@
 
     This webpage is built with css, html, and javascript. 
 
+8/30/2021
+Gap in display is fixed. Show the content was needed.
+Next is the SEARCH.!
+
+
 8/29/2021
 Exit button works
 Next button works

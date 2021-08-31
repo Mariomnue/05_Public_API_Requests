@@ -259,8 +259,9 @@ function toggleModal() {
 //move next in the gallery of modals
 function nextOnClick(event){
 containerObj[index].style.visibility = 'hidden';
-     if(index === "12"){
-          index = "1";
+     if(index === "11"){
+          index = "0";
+          containerObj[index].style.visibility = 'visible';//turn new one on
      }
      else{
           index = parseInt(index) + 1;//advance the index #
@@ -273,8 +274,9 @@ containerObj[index].style.visibility = 'hidden';
 //move back in the gallery of modals
 function prevOnClick(event){
 containerObj[index].style.visibility = 'hidden';
-     if(index === "1"){
-          index = "12";
+     if(index === "0"){
+          index = "11";
+          containerObj[index].style.visibility = 'visible';//turn new one on
      }
      else{
           index = parseInt(index) - 1;//advance the index #
