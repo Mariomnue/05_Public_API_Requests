@@ -10,6 +10,18 @@
 
     This webpage is built with css, html, and javascript. 
 
+
+8/31/2021
+SEARCH is almost done.
+   needs:
+      display modal, the filtered list.
+      move through filtered list.
+      close filtered list.
+      do not destroy anything. Do not corrupt the DOM.
+allow user to choose what they want to search. Defaults to name.
+
+
+
 8/30/2021
 Gap in display is fixed. Show the content was needed.
 Next is the SEARCH.!

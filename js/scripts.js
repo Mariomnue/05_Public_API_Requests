@@ -7,6 +7,8 @@ let gallery = document.querySelector('#gallery');
 let employees = [];
 let index = 1;
 let modalIndex = index;
+//let modalText = '';
+filteredList = [];
 
 //  afterbegin insert the Modal Container, and modal
 //close button, next, prev
@@ -20,6 +22,13 @@ document.body.insertAdjacentHTML('afterbegin',`
                <button type="button" id="modal-next" class="modal-next btn">Next</button>
           </div>
      </div>
+     <div class="search-container">
+          <form action="#" method="get" id="Search">
+               <input type="search" id="search-input" class="search-input" placeholder="Click to view">
+               <input type="submit" value="&#x1F50D;" id="search-submit" class="search-submit" title="click to view">
+          </form>
+     </div>
+
 `)
 
 const container = document.querySelector('.modal-container');//background modal
@@ -29,6 +38,70 @@ const closeButton = document.querySelector(".modal-close-btn");//close the modal
 const prevButton = document.getElementById('modal-prev');//prev modal
 const nextButton = document.getElementById('modal-next');//next modal
 
+
+
+/*############
+*   SEARCH
+*#############*/
+const search = document.querySelector('.search-container');//background modal
+const form = document.getElementById('Search')
+const input = document.getElementById('search-input');
+     form.appendChild(input);
+const searchButton = document.getElementById('search-submit');
+     form.appendChild(searchButton);
+console.log(search);
+
+noResults = document.createElement('h2');
+noResults.textContent = "Sorry, NO results have been found.";
+search.appendChild(noResults);
+noResults.style.display = ('none');
+
+
+function searchForEmployee(text){
+cnt = 0;
+     let inputVal = text;
+     clearSearch();//clear the search field
+//if any part of person name
+     for(let i=0; i<=11; i++){
+     let name = containerObj[i].firstElementChild.nextSibling.nextSibling.innerHTML.toLowerCase();
+//console.log(cnt+ " < how many? the i > " +i);
+          if(name.includes(inputVal.toLowerCase())){
+//console.log(" we have a match:  " + name + "  " +inputVal);
+               filteredList.push(i);
+               cnt++;
+//console.log("You have " +cnt+ " match(es), do you want to see them?");
+//console.log(filteredList);
+          }
+     }
+console.log("You have " +cnt+ " match(es), do you want to see them?");
+     function clearSearch(){//only runs when told or on click of search button
+          filteredList = [];
+          cnt = 0;
+//console.log(name + "   clear it");
+     }
+
+
+}
+
+
+
+//search when clicked
+form.addEventListener('submit', (e) => {
+//console.log(e);
+     noResults.style.display = 'none';
+     e.preventDefault();
+     const text = input.value;
+     input.value = '';//clear it out after its been used.
+console.log(text);
+     searchForEmployee(text);
+});
+
+//Catch the keys
+form.addEventListener('keyup', (e) =>{
+     e.preventDefault();
+     const text = input.value;
+     searchForEmployee(text);
+});
 
 
 /*############
@@ -57,7 +130,7 @@ function generateGallery(employeeData){
 console.log(employeeData);//I got data.
      let employees = employeeData;
      let cardHTML = '';
-     let modalText = '';
+//     let modalText = '';
      employees.forEach((employee, index) => {
 
           let cardIndex = index;
@@ -253,7 +326,6 @@ function toggleModal() {
    containerObj[index].style.visibility = 'hidden';
    containerObj[parseInt(index) + 1].style.visibility = 'hidden';
    containerObj[parseInt(index) - 1].style.visibility = 'hidden';
-   //index = 0;
 }
 
 //move next in the gallery of modals
