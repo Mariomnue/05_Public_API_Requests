@@ -8,7 +8,8 @@ let employees = [];
 let index = 0;
 let modalIndex = index;
 //let modalText = '';
-filteredList = [];
+let filteredList = [];
+let filteredIndex;
 
 //afterbegin insert the Modal Container, and modal
 //close button, next, prev, search container; input, submit.
@@ -57,31 +58,42 @@ noResults.textContent = "Sorry, NO results have been found.";
 search.appendChild(noResults);
 noResults.style.display = ('none');
 
-
-function searchForEmployee(text){
 cnt = 0;
+function searchForEmployee(text){
      let inputVal = text;
      clearSearch();//clear the search field
 //if any part of person name
      for(let i=0; i<=11; i++){
      let name = containerObj[i].firstElementChild.nextSibling.nextSibling.innerHTML.toLowerCase();
-//console.log(cnt+ " < how many? the i > " +i);
           if(name.includes(inputVal.toLowerCase())){
-//console.log(" we have a match:  " + name + "  " +inputVal);
                filteredList.push(i);
                cnt++;
-//console.log("You have " +cnt+ " match(es), do you want to see them?");
-//console.log(filteredList);
+console.log(name);
+console.log(filteredList);
           }
      }
 console.log("You have " +cnt+ " match(es), do you want to see them?");
-     function clearSearch(){//only runs when told or on click of search button
-          filteredList = [];
-          cnt = 0;
-//console.log(name + "   clear it");
+console.log(filteredList[1]+ " " +filteredList);
+     function clearSearch(){//moved this into the searchForStudent does not need global access.
+           for(i=0; i<cnt; i++){
+              filteredList = [];
+           }
+         cnt = 0;
+         //reset();
      }
+//console.log(name + "   clear it");
+}
 
 
+//displayModals is used by the search button, and nextButton, prevButton.
+function displayModals(){
+     container.classList.toggle("show-modal");//toggle the background.
+console.log(index+ "  display Modals");
+     //makeSwitch();//toggle the containerObj[]'s (modal-info-container objects)
+     let filteredIndex = filteredList[index];//
+     containerObj[filteredIndex].style.visibility = 'visible';
+
+console.log("I am HERE"+ filteredIndex);
 }
 
 
@@ -93,8 +105,9 @@ form.addEventListener('submit', (e) => {
      e.preventDefault();
      const text = input.value;
      input.value = '';//clear it out after its been used.
-console.log(text);
-     searchForEmployee(text);
+//console.log(text);
+     //searchForEmployee(text);
+     displayModals();
 });
 
 //Catch the keys
@@ -108,6 +121,7 @@ form.addEventListener('keyup', (e) =>{
 /*############
 *   Fetch functions
 *#############*/
+//SameSite=None
 
 fetch('https://randomuser.me/api/?results=12&exc=login,registered,id')
      .then(res => res.json())//parse the data to json
@@ -262,7 +276,7 @@ gallery.addEventListener('click', e => {
           index = card.getAttribute('data-index');
           modalIndex = index;
           const modalContainer = card.closest('modal-info-container');
-
+console.log(containerObj[index].id+ "   containerObj[index].id");
           if(index == containerObj[index].id){
                container.classList.toggle("show-modal");
                makeSwitch();
@@ -275,6 +289,14 @@ gallery.addEventListener('click', e => {
 //makeSwitch uses index to compare the case
 //toggle the containerObj turning both on an off,
 function makeSwitch(){
+/*let thisIndex = 0;
+console.log(filteredList.length+ " length");
+     if(filteredList.length < 12){
+          thisIndex = filteredList[index];
+console.log(thisIndex);
+     }
+     //else{thisIndex = index}
+console.log(thisIndex+ " this is thisIndex");*/
      switch (index) {
           case "0":
           containerObj[0].classList.toggle("show-modal")
@@ -318,6 +340,9 @@ function makeSwitch(){
 
 /*
 //unsure if windowOnClick() will be used
+for(i=0; i<cnt; i++){
+ filteredList = [];
+}
 function windowOnClick(event){
      if(event.target === modal){
           toggleModal();
